@@ -12,15 +12,15 @@ public class PlayerController : MonoBehaviour
     private float movement;
     private void Awake()
     {
-        rigidbody2D = gameObject.GetComponent<Rigidbody2D>();
-        GameManager.instance.SetLifes(spaceShipData.maxHealth);
-        GameManager.instance.SetScore(spaceShipData.currentScore);
-        GameManager.instance.SetHighScore(spaceShipData.higthScore);
+
     }
     // Start is called before the first frame update
     void Start()
     {
-        
+        rigidbody2D = gameObject.GetComponent<Rigidbody2D>();
+        GameManager.instance.SetLifes(spaceShipData.maxHealth);
+        GameManager.instance.SetScore(spaceShipData.currentScore);
+        GameManager.instance.SetHighScore(spaceShipData.higthScore);
     }
 
     // Update is called once per frame

@@ -10,11 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f6d433f9bfd6a644bbb31a655886f214, type: 3}
-  m_Name: BlueAlien
+  m_Name: GreenAlien
   m_EditorClassIdentifier: 
   movementVelocity: 3
-  maxHealth: 0
-  currentHealth: -2
-  colour: 1
-  sprite: {fileID: 2814410761476085668, guid: f0262bf608730f941accc7b2109169a5, type: 3}
-  animator: {fileID: 9100000, guid: 74eb5064901dab54b92c9be333982601, type: 2}
+  maxHealth: 1
+  currentHealth: 0
+  colour: 0
+  sprite: {fileID: 7374648009721764919, guid: f0262bf608730f941accc7b2109169a5, type: 3}
+  animator: {fileID: 9100000, guid: 127f05d8783e13b438d9cd2c489ca248, type: 2}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 64

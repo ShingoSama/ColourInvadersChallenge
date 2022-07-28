@@ -21,4 +21,5 @@ public class EnemyData : ScriptableObject
     public alienColours colour;
     public Sprite sprite;
     public AnimatorController animator;
+    public LayerMask layerMask;
 }

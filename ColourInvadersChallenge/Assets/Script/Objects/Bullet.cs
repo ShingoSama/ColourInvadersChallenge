@@ -44,9 +44,12 @@ public class Bullet : MonoBehaviour
                 Destroy(gameObject);
                 break;
             case "Enemy":
-                Debug.Log("Colision" + "DefenderShield");
-                collision.gameObject.GetComponent<EnemyController>().DecreaseHealth();
-                Destroy(gameObject);
+                Debug.Log("Colision" + "Enemy");
+                if (collision.gameObject.GetComponent<EnemyController>())
+                {
+                    collision.gameObject.GetComponent<EnemyController>().DecreaseHealth();
+                    Destroy(gameObject);
+                }
                 break;
             default:
                 break;
