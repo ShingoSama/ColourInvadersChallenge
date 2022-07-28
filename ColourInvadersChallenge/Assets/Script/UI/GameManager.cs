@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     public Text textScore;
     //TextUIScore
     public Text textLifes;
+    //TextUIScore
+    public Text textHighScore;
 
     private void Awake()
     {
@@ -22,14 +24,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    internal void SetScore(int currentScore)
+    internal void SetScore(int score)
     {
-        throw new NotImplementedException();
+        textScore.text = score.ToString("D10");
     }
 
-    internal void SetHighScore(int currentScore)
+    internal void SetHighScore(int highScore)
     {
-        throw new NotImplementedException();
+        textHighScore.text = highScore.ToString("D10");
     }
 
     // Start is called before the first frame update
