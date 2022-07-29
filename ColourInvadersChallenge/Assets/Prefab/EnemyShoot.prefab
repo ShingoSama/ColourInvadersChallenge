@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 1335672849265979880}
   - component: {fileID: 1335672849265979879}
   - component: {fileID: 1335672849265979878}
-  m_Layer: 0
+  - component: {fileID: 617618257110728872}
+  m_Layer: 10
   m_Name: EnemyShoot
-  m_TagString: Untagged
+  m_TagString: BulletEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -145,5 +146,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidbody2D: {fileID: 1335672849265979879}
-  shootSpeed: 10
+  shootSpeed: 5
   isTopDirection: 0
+--- !u!95 &617618257110728872
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1335672849265979877}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8f86fbd54dcb2b949a1afc32d54ce50f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

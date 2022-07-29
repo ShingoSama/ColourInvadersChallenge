@@ -12,10 +12,12 @@ public class EnemyData : ScriptableObject
         blue,
         yellow,
         red,
-        white
+        white,
+        none
     }
     [Header("Move State")]
     public float movementVelocity = 3f;
+    public float shootCoolDown = 3f;
     public int maxHealth;
     public int currentHealth;
     public alienColours colour;

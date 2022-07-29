@@ -7,8 +7,8 @@ public class SpaceShipData : ScriptableObject
 {
     [Header("Move State")]
     public float movementVelocity = 10f;
+    public float shootCoolDown = 3f;
     public int maxHealth;
     public int currentHealth;
     public int higthScore;
-    public int currentScore;
 }

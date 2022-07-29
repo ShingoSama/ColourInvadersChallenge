@@ -261,10 +261,16 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 00e8791f8f584e24884819d0cbda9ba5, type: 2}
   bulletPrefab: {fileID: 1335672849265979877, guid: d432c0fe33c773d47ad025454540b888, type: 3}
   shootPoint: {fileID: 8544235751214018713}
+  detectPlayer:
+    serializedVersion: 2
+    m_Bits: 256
   topPoint: {fileID: 3776951872733553777}
   leftPoint: {fileID: 888894595855773997}
   bottomPoint: {fileID: 1537789204791109517}
   rightPoint: {fileID: 5797707955501018922}
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!50 &9105133824352662405
 Rigidbody2D:
   serializedVersion: 4

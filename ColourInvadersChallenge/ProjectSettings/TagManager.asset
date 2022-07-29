@@ -4,21 +4,23 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - LabelLimit
   - DefenderShield
   - Enemy
+  - BulletPlayer
+  - BulletEnemy
+  - LevelLimit
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - LavelLimit
+  - LevelLimit
   - Water
   - UI
   - Enemy
   - DefenderShield
-  - 
-  - 
-  - 
+  - Player
+  - BulletPlayer
+  - BulletEnemy
   - 
   - 
   - 

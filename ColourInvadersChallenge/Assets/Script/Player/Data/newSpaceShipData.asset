@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: newSpaceShipData
   m_EditorClassIdentifier: 
   movementVelocity: 8
+  shootCoolDown: 0.75
   maxHealth: 3
   currentHealth: 0
   higthScore: 0
-  currentScore: 0

@@ -9,12 +9,14 @@ public class EnemyController : MonoBehaviour
     public List<EnemyData> enemiesData;
     private EnemyData enemyData;
     //Variables to die
-    public GameObject explotion;
     private int currentHealth;
     private bool isDead;
     //Variables of Attack
     public GameObject bulletPrefab;
     public Transform shootPoint;
+    public LayerMask detectPlayer;
+    private bool canShoot;
+    private float nextShoot;
     //Variables to destroy Right Top Left or Bottom Aliens
     public Transform topPoint;
     public Transform leftPoint;
@@ -25,17 +27,12 @@ public class EnemyController : MonoBehaviour
     private Animator animator;
     //Variables to move the alien
     private Rigidbody2D rigidbody2D;
-
+    private Vector3 initialPosition;
+    public LayerMask wallLayer;
     private void Awake()
     {
-        rigidbody2D = gameObject.GetComponent<Rigidbody2D>();
-        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
-        animator = gameObject.GetComponent<Animator>();
-        enemyData = enemiesData[Random.Range(0, 5)];
-        spriteRenderer.sprite = enemyData.sprite;
-        animator.runtimeAnimatorController = enemyData.animator;
-        currentHealth = enemyData.maxHealth;
-        isDead = false;
+        initialPosition = transform.position;
+        InitializeAlien();
     }
     // Start is called before the first frame update
     void Start()
@@ -46,7 +43,35 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (EnemiesSpawner.instance.moveRight)
+        {
+            rigidbody2D.velocity = new Vector2(Vector2.right.x * enemyData.movementVelocity, rigidbody2D.velocity.y);
+        }
+        else
+        {
+            rigidbody2D.velocity = new Vector2(Vector2.left.x * enemyData.movementVelocity, rigidbody2D.velocity.y);
+        }
+        if (WallDetection())
+        {
+            Flip();
+        }
+        RaycastHit2D hit2D = Physics2D.Raycast(transform.position, Vector2.down, 5f, detectPlayer);
+        if (hit2D && CalculateShotColDown())
+        {
+            if (Time.time > nextShoot)
+            {
+                Shoot();
+            }
+            
+        }
+    }
+    private bool CalculateShotColDown()
+    {
+        if (Time.time > nextShoot)
+        {
+            canShoot = true;
+        }
+        return canShoot;
     }
     public void DecreaseHealth()
     {
@@ -55,22 +80,8 @@ public class EnemyController : MonoBehaviour
         if (currentHealth <= 0 && !isDead)
         {
             isDead = true;
-            //explotion.transform.localScale = rightPoint.localScale;
-            //explotion.GetComponent<Shoots>().colour = enemyData.colour;
-            //explotion.GetComponent<Shoots>().direction = Vector2.right;
-            //Instantiate(explotion, rightPoint.position, rightPoint.rotation);
-            //explotion.transform.localScale = leftPoint.localScale;
-            //explotion.GetComponent<Shoots>().colour = enemyData.colour;
-            //explotion.GetComponent<Shoots>().direction = Vector2.left;
-            //Instantiate(explotion, leftPoint.position, leftPoint.rotation);
-            //explotion.transform.localScale = topPoint.localScale;
-            //explotion.GetComponent<Shoots>().colour = enemyData.colour;
-            //explotion.GetComponent<Shoots>().direction = Vector2.up;
-            //Instantiate(explotion, topPoint.position, topPoint.rotation);
-            //explotion.transform.localScale = bottomPoint.localScale;
-            //explotion.GetComponent<Shoots>().colour = enemyData.colour;
-            //explotion.GetComponent<Shoots>().direction = Vector2.down;
-            //Instantiate(explotion, bottomPoint.position, bottomPoint.rotation);
+            EnemiesSpawner.instance.DecreaseEnemyCounter();
+            ScoreManager.instance.SumEnemyKilled(enemyData.colour);
             DetectEnemy(rightPoint.position, Vector2.right);
             DetectEnemy(leftPoint.position, Vector2.left);
             DetectEnemy(topPoint.position, Vector2.up);
@@ -99,5 +110,42 @@ public class EnemyController : MonoBehaviour
                 }
             }
         }
+    }
+    public void InitializeAlien()
+    {
+        rigidbody2D = gameObject.GetComponent<Rigidbody2D>();
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        animator = gameObject.GetComponent<Animator>();
+        enemyData = enemiesData[Random.Range(0, 5)];
+        spriteRenderer.sprite = enemyData.sprite;
+        transform.position = initialPosition;
+        animator.runtimeAnimatorController = enemyData.animator;
+        currentHealth = enemyData.maxHealth;
+        canShoot = true;
+        nextShoot = 0;
+        isDead = false;
+    }
+    private bool WallDetection()
+    {
+        if (EnemiesSpawner.instance.moveRight)
+        {
+            return Physics2D.Raycast(transform.position, Vector2.right, 0.5f, wallLayer);
+        }
+        else
+        {
+            return Physics2D.Raycast(transform.position, Vector2.left, 0.5f, wallLayer);;
+        }
+    }
+    private void Flip()
+    {
+        EnemiesSpawner.instance.moveRight = !EnemiesSpawner.instance.moveRight;
+        EnemiesSpawner.instance.transform.Translate(Vector3.down * 0.15f);
+    }
+    private void Shoot()
+    {
+        canShoot = false;
+        nextShoot = Time.time + enemyData.shootCoolDown;
+        bulletPrefab.transform.localScale = transform.localScale;
+        Instantiate(bulletPrefab, shootPoint.position, shootPoint.rotation);
     }
 }

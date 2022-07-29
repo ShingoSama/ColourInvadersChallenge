@@ -31,28 +31,44 @@ public class Bullet : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("Colision" + collision.gameObject.layer.ToString());
-        switch (collision.gameObject.tag)
+        if (transform.tag == "BulletPlayer")
         {
-            case "LebelLimit":
-                Debug.Log("Colision" + "LebelLimit");
-                Destroy(gameObject);
-                break;
-            case "DefenderShield":
-                Debug.Log("Colision" + "DefenderShield");
-                collision.gameObject.GetComponent<Shield>().DecreaseHealth();
-                Destroy(gameObject);
-                break;
-            case "Enemy":
-                Debug.Log("Colision" + "Enemy");
-                if (collision.gameObject.GetComponent<EnemyController>())
-                {
-                    collision.gameObject.GetComponent<EnemyController>().DecreaseHealth();
-                    Destroy(gameObject);
-                }
-                break;
-            default:
-                break;
+            switch (collision.gameObject.tag.ToString())
+            {
+                case "LabelLimit":
+                    Debug.Log("Colision" + "LebelLimit");
+                    break;
+                case "DefenderShield":
+                    Debug.Log("Colision" + "DefenderShield");
+                    collision.gameObject.GetComponent<Shield>().DecreaseHealth();
+                    break;
+                case "Enemy":
+                    Debug.Log("Colision" + "Enemy");
+                    if (collision.gameObject.GetComponent<EnemyController>())
+                    {
+                        collision.gameObject.GetComponent<EnemyController>().DecreaseHealth();
+                        ScoreManager.instance.ShowScore();
+                    }
+                    break;
+            }
         }
+        if (transform.tag == "BulletEnemy")
+        {
+            switch (collision.gameObject.tag.ToString())
+            {
+                case "LabelLimit":
+                    Debug.Log("Colision" + "LebelLimit");
+                    break;
+                case "DefenderShield":
+                    Debug.Log("Colision" + "DefenderShield");
+                    collision.gameObject.GetComponent<Shield>().DecreaseHealth();
+                    break;
+                case "Player":
+                    Debug.Log("Colision" + "Player");
+                    collision.gameObject.GetComponent<PlayerController>().TakeDamage();
+                    break;
+            }
+        }
+        Destroy(gameObject);
     }
 }
