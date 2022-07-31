@@ -45,6 +45,7 @@ public class ScoreManager : MonoBehaviour
             currentAlienColor = alienColour;
         }
     }
+    //Reset the counter for the enemies hit combo
     private void ResetCounter()
     {
         enemiesKilled = 0;
@@ -53,22 +54,23 @@ public class ScoreManager : MonoBehaviour
     }
     public void ShowScore()
     {
-        int v1 = 0;
-        int v2 = 1;
+        int firstValue = 0;
+        int secontValue = 1;
 
+        //fibonacci
         for (int i = 0; i < enemiesKilled; i++)
         {
-            //Almacenamos el valor v1 en una variable temporal para no perderlo.
-            int temp = v1;
+            //Store a value en a temp variable.
+            int temp = firstValue;
 
-            //El valor 1 se convierte en el valor 2.
-            v1 = v2;
+            //value 1 it's convert in value 2.
+            firstValue = secontValue;
 
-            //Sumamos los valores.
-            v2 = temp + v1;
+            //Sum both values.
+            secontValue = temp + firstValue;
         }
 
-        scoreCalculated = enemiesKilled * v2 * 10;
+        scoreCalculated = enemiesKilled * secontValue * 10;
         GameManager.instance.SumScore(scoreCalculated);
         ResetCounter();
     }

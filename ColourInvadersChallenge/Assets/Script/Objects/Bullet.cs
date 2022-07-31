@@ -35,7 +35,7 @@ public class Bullet : MonoBehaviour
         {
             switch (collision.gameObject.tag.ToString())
             {
-                case "LabelLimit":
+                case "LevelLimit":
                     Debug.Log("Colision" + "LebelLimit");
                     break;
                 case "DefenderShield":
@@ -56,7 +56,7 @@ public class Bullet : MonoBehaviour
         {
             switch (collision.gameObject.tag.ToString())
             {
-                case "LabelLimit":
+                case "LevelLimit":
                     Debug.Log("Colision" + "LebelLimit");
                     break;
                 case "DefenderShield":

@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class Shield : MonoBehaviour
 {
+    public GameObject explosion;
+    private Animator anim;
     private int maxHealth;
     private int currentHealth;
     // Start is called before the first frame update
     void Start()
     {
-        maxHealth = 5;
+        maxHealth = 4;
         currentHealth = maxHealth;
+        anim = this.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -18,12 +21,20 @@ public class Shield : MonoBehaviour
     {
 
     }
+    //Decrease health an change the animation
     public void DecreaseHealth()
     {
         currentHealth--;
+        anim.SetInteger("Hits", currentHealth);
         if (currentHealth <= 0)
         {
+            Instantiate(explosion, transform.position, transform.rotation);
             gameObject.SetActive(false);
         }
+    }
+    //Reset shield health to the new game
+    public void ResetShield()
+    {
+        currentHealth = maxHealth;
     }
 }

@@ -34,7 +34,8 @@ public class EnemiesSpawner : MonoBehaviour
             ResetEnemies();
         }
     }
-    private void ResetEnemies()
+    //Reset the enemies to continue playing, reset her position and speed
+    public void ResetEnemies()
     {
         transform.position = spawnPoint.position;
         foreach (GameObject enemySpawn in enemiesSpawn)
@@ -44,8 +45,13 @@ public class EnemiesSpawner : MonoBehaviour
         }
         currentEnemies = maxEnemies;
     }
+    //Substract enemies counter and add multipler speed
     public void DecreaseEnemyCounter()
     {
         currentEnemies--;
+        foreach (GameObject enemySpawn in enemiesSpawn)
+        {
+            enemySpawn.GetComponent<EnemyController>().AddSpeed(0.1f);
+        }
     }
 }

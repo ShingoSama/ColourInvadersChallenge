@@ -260,6 +260,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 51d64cbfd0a97194b8bb2b0e0bca7d75, type: 2}
   - {fileID: 11400000, guid: 00e8791f8f584e24884819d0cbda9ba5, type: 2}
   bulletPrefab: {fileID: 1335672849265979877, guid: d432c0fe33c773d47ad025454540b888, type: 3}
+  explosion: {fileID: 4453157043901653846, guid: 846852e3e69b17a42a723873c1bfa5f1, type: 3}
   shootPoint: {fileID: 8544235751214018713}
   detectPlayer:
     serializedVersion: 2
